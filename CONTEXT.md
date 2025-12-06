@@ -36,6 +36,12 @@ When helping me:
 - Use shadcn/ui and TailwindCSS examples
 - Don't assume I know frontend terminology
 
+## Git Commit Preferences
+
+- **Commit messages**: Keep them in **one line only**
+- Use conventional commit format: `feat:`, `fix:`, `docs:`, etc.
+- Be concise but descriptive
+
 ---
 
 **Started**: December 2024  
