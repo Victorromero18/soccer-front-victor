@@ -1,4 +1,5 @@
 import LoginPage from './pages/LoginPage'
+import TestBackendConnection from './pages/TestBackendConnection'
 
 /**
  * Main App Component
@@ -8,6 +9,9 @@ import LoginPage from './pages/LoginPage'
  * Later, we'll add React Router for navigation
  */
 function App() {
+  // Uncomment this line to test backend connection:
+  // return <TestBackendConnection />
+  
   return <LoginPage />
 }
 

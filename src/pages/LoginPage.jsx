@@ -52,21 +52,32 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent page reload
     
+    console.log('📝 Form submitted with:', { 
+      email, 
+      password: '***' // Don't log actual password
+    });
+    
     // Validate before submitting
     if (!validateForm()) {
+      console.log('❌ Validation failed');
       return;
     }
 
+    console.log('✅ Validation passed, calling API...');
+
     try {
       // Call login function from store
-      await login(email, password);
+      const result = await login(email, password);
       
-      // If successful, you'll be redirected by the store
-      // For now, just show success in console
-      console.log('Login exitoso!');
+      console.log('🎉 Login successful!', result);
       alert('¡Login exitoso! Bienvenido');
     } catch (error) {
-      console.error('Error en login:', error);
+      console.error('💥 Login failed:', error);
+      console.error('Error details:', {
+        message: error.message,
+        response: error.response?.data,
+        status: error.response?.status
+      });
       // Error is handled by the store and shown below
     }
   };

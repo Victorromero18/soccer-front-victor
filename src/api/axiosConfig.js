@@ -15,6 +15,13 @@ const apiClient = axios.create({
 // Request interceptor: Add JWT token to every request
 apiClient.interceptors.request.use(
   (config) => {
+    // Debug logging
+    console.log('🚀 API Request:', {
+      method: config.method?.toUpperCase(),
+      url: config.baseURL + config.url,
+      data: config.data,
+    });
+    
     const token = localStorage.getItem('token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -22,14 +29,30 @@ apiClient.interceptors.request.use(
     return config;
   },
   (error) => {
+    console.error('❌ Request Error:', error);
     return Promise.reject(error);
   }
 );
 
 // Response interceptor: Handle errors globally
 apiClient.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    // Debug logging
+    console.log('✅ API Response:', {
+      status: response.status,
+      data: response.data,
+    });
+    return response;
+  },
   (error) => {
+    // Debug logging
+    console.error('❌ API Error:', {
+      message: error.message,
+      status: error.response?.status,
+      data: error.response?.data,
+      url: error.config?.url,
+    });
+    
     // If token expired or invalid (401), logout user
     if (error.response?.status === 401) {
       localStorage.removeItem('token');
