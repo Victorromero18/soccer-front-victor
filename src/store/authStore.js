@@ -38,6 +38,25 @@ export const useAuthStore = create((set) => ({
   },
 
   /**
+   * Register SuperAdmin action
+   */
+  register: async (email, password, nombreLiga) => {
+    set({ loading: true, error: null });
+    try {
+      const data = await authService.registerSuperAdmin(email, password, nombreLiga);
+      set({ loading: false });
+      return data;
+    } catch (error) {
+      const errorMessage = error.response?.data?.message || 'Error al registrarse';
+      set({ 
+        error: errorMessage,
+        loading: false 
+      });
+      throw error;
+    }
+  },
+
+  /**
    * Logout action
    */
   logout: () => {
