@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Get API URL from environment variables
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://your-app.onrender.com';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://soccer-backend-pgsf.onrender.com';
 
 // Create Axios instance with default configuration
 const apiClient = axios.create({
